@@ -9,10 +9,10 @@
 <body>
     <script>
         async function fetchData() {
-            const url = 'https://random-data-api.com/api/v2/cannabis'
+            const url = 'https://stock-market-app-om.onrender.com/stockindices/nse'
             const res = await fetch(url)
-            // const data = await res.json()
-            return res
+            const data = await res.json()
+            return data
         }
         console.log(fetchData())
     </script>

@@ -1,7 +1,17 @@
 const Login = () => {
     return (
         <>
-            Login Page
+            <div className="login-page">
+                <div className="card">
+                    <form>
+                        <label htmlFor="Email">Email</label>
+                        <input type="email" />
+                        <label htmlFor="password">Password</label>
+                        <input type="password" />
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
         </>
     )
 }

@@ -1,0 +1,140 @@
+.chart {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+#chart-heading {
+    margin-left: 150px;
+}
+
+.chart-preview {
+    height: 400px;
+    width: 600px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 2% 10% 0 10%;
+}
+
+.nav {
+    margin: 10px 0;
+}
+
+.nav-options {
+    color: grey;
+    display: inline-block;
+    width: 100px;
+    min-width: fit-content;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-options:hover {
+    color: #666;
+}
+
+.nav-main .active {
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.nav-sub .active {
+    border-bottom: 2px solid #333;
+}
+
+.heading-lg {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: sans-serif;
+    margin: 20px 0;
+}
+
+.hr-lg {
+    background-color: rgba(173, 216, 230, 0.5);
+    width: 90%;
+    height: 10px;
+}
+
+.hr-sm {
+    background-color: lightblue;
+    width: 90%;
+    height: 3px;
+}
+
+.vr {
+    display: inline-block;
+    width: 2px;
+    height: 12px;
+    background-color: grey;
+    margin: 0 3px;
+}
+
+.main {
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+
+}
+
+.chart {
+
+}
+
+.overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+}
+
+.table-items {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.th {
+    display: inline;
+    justify-self: flex-start;
+    color: grey;
+}
+
+.td {
+    display: inline;
+    align-self: flex-end;
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-content: center;
+}
+
+.card form {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 0 10px #00000077;
+}
+
+.card form >* {
+    width: 80%;
+    margin: 10px auto
+}

@@ -10,7 +10,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { fetchData } from '../utils/fetchData';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '../utils/fetchData';
+// import { set } from 'mongoose';
 
 
 ChartJS.register(
@@ -22,6 +24,18 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const formatYmd = date => date.slice(0, 10);
+// formatYmd(new Date()); 
+
+function filterfunc(data, param) {
+  const newData = data.map(obj => {
+    // const {Date, Close} = obj
+    const newObj = [ formatYmd(obj['Date']),  obj[param]]
+    return newObj
+  })
+  return newData
+}
 
 export const options = {
   responsive: true,
@@ -36,44 +50,51 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const data1 = {
-  "first": 1,
-  "second": 2,
-  "third": 3
-}
-const data2 = {
-  "one": 11,
-  "two": 2,
-  "three": 3
-}
-export const data = {
-  labels,
+const data = {
+  labels: [],
   datasets: [
     {
-      label: 'Dataset 1',
-      data: data1,
-      // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      label: 'High',
+      data: [],
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
     {
-      label: 'Dataset 2',
-      data: data2,
-      // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      label: 'Low',
+      data: [],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-const Chart = () =>{
-  const [data, setData] = useState({})
-  useEffect(()=> {
-    setData(fetchData())
-    console.log(data)
-  })
-  return <Line options={options} data={data} />;
+const Chart = (props) =>{
+  const stockData = useQuery(["stocks", props.searchId], fetchData)
+  if (stockData.isError) {
+    return <h2>API Data Error</h2>;
+  }
+
+  if (stockData.isLoading) {
+    return (
+      <div>
+        <h2>...</h2>
+      </div>
+    );
+  }
+
+  let apiDdata = filterfunc(stockData.data, 'Low')
+  data.datasets[1].data = apiDdata
+  apiDdata = filterfunc(stockData.data, 'High')
+  data.datasets[0].data = apiDdata
+  data.labels = apiDdata.map(obj => obj[0])
+  return (
+    <>
+      <h2 id='chart-heading'>{props.searchName}</h2>
+      <div className="chart">
+      <Line options={options} data={data} />
+      </div>
+    </>
+    );
 }
 
 export default Chart
